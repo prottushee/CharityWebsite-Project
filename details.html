@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>দানের পোর্টাল</title>
+    <style>
+      /* ডিফল্ট মার্জিন এবং প্যাডিং রিসেট */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* বডির স্টাইল */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+
+      /* হেডারের স্টাইল */
+      header {
+        background: radial-gradient(
+          759px at 14% 22.3%,
+          rgb(10, 64, 88) 0%,
+          rgb(15, 164, 102) 90%
+        );
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+      }
+
+      /* টাইটেলের স্টাইল */
+      h1 {
+        font-size: 24px;
+      }
+
+      /* নেভিগেশনের স্টাইল */
+      nav {
+        background-color: #444;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+        color: #ccc;
+      }
+
+      /* সেকশনের স্টাইল */
+      section {
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 800px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* সেকশনের টাইটেলের স্টাইল */
+      h2 {
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      /* প্যারাগ্রাফের স্টাইল */
+      p {
+        color: #555;
+        margin-bottom: 15px;
+      }
+
+      /* সিলেক্টের স্টাইল */
+      select {
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        max-width: 200px; /* ড্রপডাউন মেনুর জন্য প্রস্তুতকৃত প্রস্থ */
+        margin-bottom: 15px;
+      }
+
+      /* রিস্পন্সিভ স্টাইল */
+      @media (max-width: 768px) {
+        nav a {
+          margin: 0 5px; /* ছোট স্ক্রিনের জন্য সংশোধিত মার্জিন */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>সহায়তার <b style="color: green">দ্বার</b></h1>
+    </header>
+
+    <nav>
+      <a href="#food">খাদ্য দান</a>
+      <a href="#cloth">বস্ত্র দান</a>
+      <a href="#storm">দুর্যোগের ত্রান</a>
+      <a href="#education">শিক্ষা সহায়তা</a>
+    </nav>
+
+    <section id="food">
+      <h2>খাদ্য দান প্রোগ্রাম</h2>
+      <p>
+        <strong>বিতরণের স্থান:</strong>
+        <select id="foodDistributionLocation" onchange="updateFoodDetails()">
+          <option value="Rohinga Camp">রোহিঙ্গা শিবির</option>
+          <option value="Mohammadpur">মোহাম্মদপুর</option>
+          <option value="Mirpur">মিরপুর</option>
+          <option value="Kamrangirchar">কামরাঙ্গীরচর</option>
+          <option value="Keraniganj">কেরানীগঞ্জ</option>
+          <option value="Kamalapur">কমলাপুর</option>
+          <option value="Demra">ডেমরা</option>
+        </select>
+      </p>
+      <p>
+        <strong>বিতরণের সময়সূচি:</strong>
+        <span id="foodDistributionSchedule">প্রতি শুক্রবার সন্ধ্যা ২টা</span>
+      </p>
+      <p>
+        <strong>সেবা প্রাপ্ত মানুষের পরিমাণ:</strong>
+        <span id="foodAmountServed">১০০ থেকে ১২০ জন</span>
+      </p>
+    </section>
+
+    <section id="cloth">
+      <h2>বস্ত্র দান প্রোগ্রাম</h2>
+      <p>
+        <strong>বিতরণের স্থান:</strong>
+        <select id="clothDistributionLocation" onchange="updateClothDetails()">
+          <option value="Savar">সাভার</option>
+          <option value="Gazipur">গাজীপুর</option>
+          <option value="Tongi">টঙ্গী</option>
+          <option value="Dhamrai">ধামরাই</option>
+          <option value="Narayanganj">নারায়ণগঞ্জ</option>
+          <option value="Ashulia">আশুলিয়া</option>
+          <option value="Munshiganj">মুন্সিগঞ্জ</option>
+        </select>
+      </p>
+      <p>
+        <strong>বিতরণের সময়সূচি:</strong>
+        <span id="clothDistributionSchedule">প্রতি মঙ্গলবার সকাল ১০টা</span>
+      </p>
+      <p>
+        <strong>সেবা প্রাপ্ত মানুষের পরিমাণ:</strong>
+        <span id="clothAmountServed">৫০ থেকে ৭০ জন</span>
+      </p>
+    </section>
+
+    <section id="storm">
+      <h2>দুর্যোগের ত্রান প্রোগ্রাম</h2>
+      <p>
+        <strong>বিতরণের স্থান:</strong>
+        <select id="stormDistributionLocation" onchange="updateStormDetails()">
+          <option value="Cox's Bazar">কক্সবাজার</option>
+          <option value="Chittagong">চট্টগ্রাম</option>
+          <option value="Barisal">বরিশাল</option>
+          <option value="Patuakhali">পটুয়াখালী</option>
+        </select>
+      </p>
+      <p>
+        <strong>সেবা প্রাপ্ত মানুষের পরিমাণ:</strong>
+        <span id="stormAmountServed">৮০ থেকে ১০০ জন</span>
+      </p>
+    </section>
+
+    <section id="education">
+      <h2>শিক্ষা সহায়তা প্রোগ্রাম</h2>
+      <p>
+        <strong>বিতরণের স্থান:</strong>
+        <select
+          id="educationDistributionLocation"
+          onchange="updateEducationDetails()"
+        >
+          <option value="Tongi">টঙ্গী</option>
+          <option value="Gazipur">গাজীপুর</option>
+          <option value="Narayanganj">নারায়ণগঞ্জ</option>
+          <option value="Dhamrai">ধামরাই</option>
+          <option value="Savar">সাভার</option>
+          <option value="Keraniganj">কেরানীগঞ্জ</option>
+          <option value="Munshiganj">মুন্সিগঞ্জ</option>
+        </select>
+      </p>
+      <p>
+        <strong>বিতরণ:</strong>
+        <span id="educationDistributionSchedule"
+          >স্বেচ্ছাসেবকরা ক্ষতিগ্রস্ত শিশুদের সাহায্য করার চেষ্টা করবে স্কুলের
+          সরঞ্জাম সরবরাহ করে, তাদের অভিভাবকদের সাথে কথা বলে এবং মানসিক সহায়তা
+          প্রদান করে। তারা শিক্ষামূলক কর্মশালা আয়োজন করবে, বিনোদনমূলক কার্যক্রম
+          সমন্বয় করবে এবং স্থানীয় সংস্থাগুলির সাথে সহযোগিতা করবে যাতে শিশুদের
+          প্রয়োজনীয় সম্পদ এবং যত্ন পাওয়া যায়।</span
+        >
+      </p>
+    </section>
+
+    <script>
+      function updateFoodDetails() {
+        var locationSelect = document.getElementById(
+          "foodDistributionLocation"
+        );
+        var location =
+          locationSelect.options[locationSelect.selectedIndex].value;
+        var schedule = "";
+        var served = "";
+
+        // খাদ্য দানের নির্বাচিত অবস্থানের ভিত্তিতে সময়সূচি এবং পরিষেবিত সংখ্যা আপডেট করুন
+        switch (location) {
+          case "Rohinga Camp":
+            schedule = "প্রতি শুক্রবার সন্ধ্যা ২টা";
+            served = "১০০ থেকে ১২০ জন";
+            break;
+          case "Mohammadpur":
+            schedule = "প্রতি বুধবার সন্ধ্যা ৩টা";
+            served = "৮০ থেকে ১০০ জন";
+            break;
+          case "Mirpur":
+            schedule = "প্রতি সোমবার সন্ধ্যা ৪টা";
+            served = "১২০ থেকে ১৫০ জন";
+            break;
+          case "Kamrangirchar":
+            schedule = "প্রতি বৃহস্পতিবার সন্ধ্যা ১টা";
+            served = "১৫০ থেকে ১৮০ জন";
+            break;
+          case "Keraniganj":
+            schedule = "প্রতি শনিবার সকাল ১০টা";
+            served = "২০০ থেকে ২২০ জন";
+            break;
+          case "Kamalapur":
+            schedule = "প্রতি মঙ্গলবার সন্ধ্যা ২টা";
+            served = "৮০ থেকে ১০০ জন";
+            break;
+          case "Demra":
+            schedule = "প্রতি রবিবার সন্ধ্যা ১২টা";
+            served = "১৮০ থেকে ২০০ জন";
+            break;
+        }
+
+        document.getElementById("foodDistributionSchedule").innerText =
+          schedule;
+        document.getElementById("foodAmountServed").innerText = served;
+      }
+
+      function updateClothDetails() {
+        var locationSelect = document.getElementById(
+          "clothDistributionLocation"
+        );
+        var location =
+          locationSelect.options[locationSelect.selectedIndex].value;
+        var schedule = "";
+        var served = "";
+
+        // বস্ত্র  দানের নির্বাচিত অবস্থানের ভিত্তিতে সময়সূচি এবং পরিষেবিত সংখ্যা আপডেট করুন
+        switch (location) {
+          case "Savar":
+            schedule = "প্রতি মঙ্গলবার সকাল ১০টা";
+            served = "৫০ থেকে ৭০ জন";
+            break;
+          case "Gazipur":
+            schedule = "প্রতি বুধবার সকাল ১১টা";
+            served = "৬০ থেকে ৮০ জন";
+            break;
+          case "Tongi":
+            schedule = "প্রতি বৃহস্পতিবার সকাল ৯টা";
+            served = "৭০ থেকে ৯০ জন";
+            break;
+          case "Dhamrai":
+            schedule = "প্রতি শুক্রবার সন্ধ্যা ২টা";
+            served = "৮০ থেকে ১০০ জন";
+            break;
+          case "Narayanganj":
+            schedule = "প্রতি শনিবার সন্ধ্যা ৩টা";
+            served = "৯০ থেকে ১১০ জন";
+            break;
+          case "Ashulia":
+            schedule = "প্রতি রবিবার সন্ধ্যা ১২টা";
+            served = "১০০ থেকে ১২০ জন";
+            break;
+          case "Munshiganj":
+            schedule = "প্রতি সোমবার সন্ধ্যা ১টা";
+            served = "১১০ থেকে ১৩০ জন";
+            break;
+        }
+
+        document.getElementById("clothDistributionSchedule").innerText =
+          schedule;
+        document.getElementById("clothAmountServed").innerText = served;
+      }
+
+      function updateStormDetails() {
+        var locationSelect = document.getElementById(
+          "stormDistributionLocation"
+        );
+        var location =
+          locationSelect.options[locationSelect.selectedIndex].value;
+        var served = "";
+
+        // দুর্যোগের ত্রান প্রোগ্রামের নির্বাচিত অবস্থানের ভিত্তিতে সেবা প্রাপ্ত সংখ্যা আপডেট করুন
+        switch (location) {
+          case "Cox's Bazar":
+            served = "৮০ থেকে ১০০ জন";
+            break;
+          case "Chittagong":
+            served = "৯০ থেকে ১১০ জন";
+            break;
+          case "Barisal":
+            served = "১০০ থেকে ১২০ জন";
+            break;
+          case "Patuakhali":
+            served = "১১০ থেকে ১৩০ জন";
+            break;
+        }
+
+        document.getElementById("stormAmountServed").innerText = served;
+      }
+    </script>
+  </body>
+</html>
